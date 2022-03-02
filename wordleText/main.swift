@@ -8,7 +8,7 @@
 import Foundation
 
 enum LetterState {
-    case GoodPosition
+    case Good
     case GoodWrongPosition
     case Wrong
 }
@@ -60,14 +60,14 @@ while numberOfGuesses > 0 {
         for (letter, letterState) in zip(guess, letterStates) {
             switch letterState {
 
-            case .GoodPosition:      print("\(letter.uppercased())", terminator: "")
+            case .Good:              print("\(letter.uppercased())", terminator: "")
             case .GoodWrongPosition: print("\(letter)", terminator: "")
             case .Wrong:             print("_", terminator: "")
             }
         }
         print()
         
-        if letterStates.allSatisfy( { $0 == .GoodPosition } ) {
+        if letterStates.allSatisfy( { $0 == .Good } ) {
             print("Congratulations")
             break
         }
@@ -84,10 +84,10 @@ func GetLetterStates(guess: String) -> [LetterState] {
     var letterStates = [LetterState](repeating: .Wrong, count: word.count)
     var theWord = word.toCharacters()
 
-    // first check for good position letters
+    // first check for good letters
     for (i, (a, b)) in zip(guess, word).enumerated() {
         if a == b {
-            letterStates[i] = .GoodPosition
+            letterStates[i] = .Good
             theWord[i] = " "
         }
     }
@@ -96,7 +96,7 @@ func GetLetterStates(guess: String) -> [LetterState] {
     for (i, letter) in guess.enumerated() {
         
         // if the letter was already good, skip
-        if letterStates[i] == .GoodPosition {
+        if letterStates[i] == .Good {
             continue
         }
         
