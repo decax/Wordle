@@ -103,9 +103,7 @@ func GetLetterStates(guess: String) -> [LetterState] {
         // otherwise, check if we have a GoodWrongPosition
         if let index = theWord.firstIndex(of: letter) {
             letterStates[i] = .GoodWrongPosition
-            
-            let intIndex = theWord.distance(from: theWord.startIndex, to: index) // convert index to int
-            theWord[intIndex] = " "
+            theWord[index] = " "
         }
     }
 
